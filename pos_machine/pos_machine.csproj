@@ -46,7 +46,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ADiscount.cs" />
     <Compile Include="DisCount.cs" />
+    <Compile Include="DiscountFactory.cs" />
+    <Compile Include="discount\AllItems85Percent.cs" />
+    <Compile Include="discount\BraisedPork3For240.cs" />
+    <Compile Include="discount\ChickenLegBuy2Get1.cs" />
+    <Compile Include="discount\ChickenSteak3For79Percent.cs" />
+    <Compile Include="discount\CurryWithCoke150.cs" />
+    <Compile Include="discount\DrinkFixedPrice25.cs" />
+    <Compile Include="discount\GrilledMeatWithEggFreeTiramisu.cs" />
+    <Compile Include="discount\MackerelWithSoup85Percent.cs" />
+    <Compile Include="discount\PorkRibFreeTea.cs" />
+    <Compile Include="discount\Spend399Get50Off.cs" />
     <Compile Include="EventPanel.cs" />
     <Compile Include="Extension.cs" />
     <Compile Include="Form1.cs">
@@ -86,5 +98,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
