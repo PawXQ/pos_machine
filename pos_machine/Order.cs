@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static pos_machine.Menus;
 
 namespace pos_machine
 {
@@ -12,7 +13,7 @@ namespace pos_machine
     {
         public static List<Item> list_item = new List<Item>();
 
-        public static void Additem(Item item, string discountType)
+        public static void Additem(Item item, Discount discount)
         {
             Item product = list_item.FirstOrDefault(x => x.Name == item.Name);
 
@@ -21,12 +22,12 @@ namespace pos_machine
             if (product != null) { product.Count = item.Count; }
             if (product.Count == "0") { list_item.Remove(product); }
 
-            DisCount.DiscountOrder(discountType, list_item);
+            DisCount.DiscountOrder(discount, list_item);
         }
 
-        public static void DisCountOrder(string discountType)
+        public static void DisCountOrder(Discount discount)
         {
-            DisCount.DiscountOrder(discountType, list_item);
+            DisCount.DiscountOrder(discount, list_item);
         }
 
         //public static void Render(FlowLayoutPanel flowoutpanel_top_level)

@@ -1,12 +1,16 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static pos_machine.Menus;
 
 namespace pos_machine
 {
@@ -25,10 +29,10 @@ namespace pos_machine
         private string price_calculator()
         {
             int total_price = 0;
-            total_price += flowLayoutPanel1.CalculatePanelTotal();
-            total_price += flowLayoutPanel2.CalculatePanelTotal();
-            total_price += flowLayoutPanel3.CalculatePanelTotal();
-            total_price += flowLayoutPanel4.CalculatePanelTotal();
+            //total_price += flowLayoutPanel1.CalculatePanelTotal();
+            //total_price += flowLayoutPanel2.CalculatePanelTotal();
+            //total_price += flowLayoutPanel3.CalculatePanelTotal();
+            //total_price += flowLayoutPanel4.CalculatePanelTotal();
 
             return total_price.ToString();
         }
@@ -40,16 +44,32 @@ namespace pos_machine
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            // main meal flowLayoutPanel1
-            flowLayoutPanel1.CreateFromList(this.list_main_meal, CheckChange, ValueChange);
-            // side meal flowLayoutPanel2
-            flowLayoutPanel2.CreateFromList(this.list_side_meal, CheckChange, ValueChange);
-            // drink flowLayoutPanel3
-            flowLayoutPanel3.CreateFromList(this.list_drink, CheckChange, ValueChange);
-            // dessert flowLayoutPanel4
-            flowLayoutPanel4.CreateFromList(this.list_dessert, CheckChange, ValueChange);
 
-            comboBox1.SelectedIndex = 0;
+            string menu_path = ConfigurationManager.AppSettings["menu_path"];
+            string content = File.ReadAllText(menu_path);
+            Menus menus = JsonConvert.DeserializeObject<Menus>(content); // ORM => Object Relaction Mapping
+
+
+            for (int i = 0; i < menus.Items.Length; i++)
+            {
+                FlowLayoutPanel flowLayoutPanel2 = new FlowLayoutPanel();
+                flowLayoutPanel2.BorderStyle = BorderStyle.FixedSingle;
+                flowLayoutPanel2.AutoScroll = true;
+                flowLayoutPanel2.Size = new System.Drawing.Size(this.flowLayoutPanel1.Width / 2 - 50, this.flowLayoutPanel1.Height / 2);
+                Label label = new Label();
+
+                label.Text = menus.Items[i].TypeName.ToString();
+                label.Size = new System.Drawing.Size(flowLayoutPanel2.Width, 30);
+                label.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                List<string> foods = menus.Items[i].Foods.Select(x => $"{x.Name}${x.Price}").ToList();
+                flowLayoutPanel2.Controls.Add(label);
+                flowLayoutPanel2.CreateFromList(foods, CheckChange, ValueChange);
+                flowLayoutPanel1.Controls.Add(flowLayoutPanel2);
+            }
+
+            comboBox1.DataSource = menus.Discounts;
+            comboBox1.DisplayMember = "Name";
+
         }
 
         private void CheckChange(object sender, EventArgs e)
@@ -62,7 +82,7 @@ namespace pos_machine
             Item item = new Item(Name: $"{checkBox.Text.Split('$')[0]}",
                                  UnitPrice: $"{checkBox.Text.Split('$')[1]}",
                                  Count: $"{numericUpDown.Value}");
-            Order.Additem(item, comboBox1.Text);
+            Order.Additem(item, (Discount)comboBox1.SelectedValue);
             //Order.Render(flowLayoutPanel5);
             //flowLayoutPanel5.UpdatePanel(checkBox);
         }
@@ -77,7 +97,7 @@ namespace pos_machine
             Item item = new Item(Name: $"{checkBox.Text.Split('$')[0]}",
                                  UnitPrice: $"{checkBox.Text.Split('$')[1]}",
                                  Count: $"{numericUpDown.Value}");
-            Order.Additem(item, comboBox1.Text);
+            Order.Additem(item, (Discount)comboBox1.SelectedValue);
             //Order.Render(flowLayoutPanel5);
             //flowLayoutPanel5.UpdatePanel(checkBox);
         }
@@ -90,7 +110,12 @@ namespace pos_machine
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Order.DisCountOrder(comboBox1.Text.ToString());
+            if (comboBox1.SelectedValue is Discount discount)
+            {
+                Order.DisCountOrder(discount);
+
+            }
+
 
         }
     }
