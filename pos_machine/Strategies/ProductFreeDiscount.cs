@@ -16,6 +16,7 @@ namespace pos_machine.Strategies
         {
             var buyResult = this.list_items.Select(x =>
             {
+
                 var condition = discountType.Conditions.FirstOrDefault(y => y.Product == x.Name);
                 if (condition == null || int.Parse(x.Count) < condition.Quantity)
                 {
