@@ -91,17 +91,17 @@
     },
     {
       "id": 3,
-      "Name": "燒肉便當搭配蒸蛋送提拉米蘇",
+      "Name": "燒肉便當搭配蒸蛋送提拉米蘇和布丁",
       "Strategy": "pos_machine.Strategies.ProductFreeDiscount",
       "Conditions": [
         {
           "Product": "燒肉便當",
-          "Quantity": 1,
+          "Quantity": 3,
           "TotalPrice": -1
         },
         {
           "Product": "蒸蛋",
-          "Quantity": 1,
+          "Quantity": 2,
           "TotalPrice": -1
         }
       ],
@@ -109,6 +109,13 @@
         {
           "Product": "提拉米蘇",
           "Quantity": 1,
+          "Price": -1,
+          "TotalPrice": -1,
+          "Percentage": -1
+        },
+        {
+          "Product": "布丁",
+          "Quantity": 5,
           "Price": -1,
           "TotalPrice": -1,
           "Percentage": -1

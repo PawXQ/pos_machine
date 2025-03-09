@@ -113,7 +113,6 @@ namespace pos_machine
             if (comboBox1.SelectedValue is Discount discount)
             {
                 Order.DisCountOrder(discount);
-
             }
 
 
