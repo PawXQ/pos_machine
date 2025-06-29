@@ -66,9 +66,42 @@ namespace pos_machine
                 flowLayoutPanel2.CreateFromList(foods, CheckChange, ValueChange);
                 flowLayoutPanel1.Controls.Add(flowLayoutPanel2);
             }
-
             comboBox1.DataSource = menus.Discounts;
             comboBox1.DisplayMember = "Name";
+
+            var query0 = menus.Items.GroupBy(x => x.TypeName);
+
+            //groupby
+            var query = menus.Items.GroupBy(x => x.TypeName).Select(x => new
+            {
+                Name = x.Key,
+                Total = x.Sum(y => y.Foods.Sum(z => z.Price))
+            });
+            foreach (var item in query)
+            {
+                Console.WriteLine(item.Name + ":" + item.Total);
+            }
+
+            var query2 = menus.Discounts.GroupBy(x => x.Strategy).Select(x => new
+            {
+                Name = x.Key,
+                Count = x.Count(),
+            });
+            foreach (var item in query2)
+            {
+                Console.WriteLine(item.Name + ":" + item.Count);
+            }
+            var query3 = menus.Discounts.GroupBy(x => x.Strategy);
+
+            foreach (var item in query3)
+            {
+                foreach (var item2 in item)
+                {
+                    Console.WriteLine(item2.Name);
+                    Console.WriteLine(item2.Strategy);
+                }
+            }
+
 
         }
 

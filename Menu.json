@@ -32,7 +32,9 @@
         { "Name": "綠茶", "Price": 35 },
         { "Name": "冬瓜茶", "Price": 40 },
         { "Name": "奶茶", "Price": 45 },
-        { "Name": "可樂", "Price": 50 }
+        { "Name": "可樂", "Price": 50 },
+        { "Name": "汽水", "Price": 50 },
+        { "Name": "咖啡", "Price": 50 }
       ]
     },
     {
@@ -48,6 +50,33 @@
   ],
   "Discounts": [
     {
+      "id": 0,
+      "Name": "所有飲料任選三杯送一杯送最便宜價格",
+      "Strategy": "pos_machine.Strategies.ProductFreeDiscount",
+      "Conditions": [
+        {
+          "Product": "紅茶,綠茶,冬瓜茶,奶茶,可樂",
+          "Quantity": 3,
+          "TotalPrice": 0
+        }
+        // {
+        //   "Product": "汽水,咖啡",
+        //   "Quantity": 3,
+        //   "TotalPrice": 0
+        // }
+      ],
+      "Rewards": [
+        {
+          "Product": "紅茶,綠茶,冬瓜茶,奶茶,可樂",
+          "RewardsType":"Min",
+          "Quantity": 1,
+          "Price": 0,
+          "TotalPrice": 0,
+          "Percentage": 0
+        }
+      ]
+    },
+    {
       "id": 1,
       "Name": "雞腿便當買二送一",
       "Strategy": "pos_machine.Strategies.ProductFreeDiscount",
@@ -61,6 +90,7 @@
       "Rewards": [
         {
           "Product": "雞腿便當",
+          "RewardsType":"",
           "Quantity": 1,
           "Price": -1,
           "TotalPrice": -1,
@@ -82,6 +112,7 @@
       "Rewards": [
         {
           "Product": "紅茶",
+          "RewardsType":"",
           "Quantity": 1,
           "Price": -1,
           "TotalPrice": -1,
@@ -95,19 +126,20 @@
       "Strategy": "pos_machine.Strategies.ProductFreeDiscount",
       "Conditions": [
         {
-          "Product": "燒肉便當",
-          "Quantity": 3,
+          "Product": "燒肉便當,滷肉便當",
+          "Quantity": 2,
           "TotalPrice": -1
         },
         {
           "Product": "蒸蛋",
-          "Quantity": 2,
+          "Quantity": 1,
           "TotalPrice": -1
         }
       ],
       "Rewards": [
         {
           "Product": "提拉米蘇",
+          "RewardsType":"",
           "Quantity": 1,
           "Price": -1,
           "TotalPrice": -1,
@@ -115,6 +147,7 @@
         },
         {
           "Product": "布丁",
+          "RewardsType":"",
           "Quantity": 5,
           "Price": -1,
           "TotalPrice": -1,
@@ -136,6 +169,7 @@
       "Rewards": [
         {
           "Product": "",
+          "RewardsType":"",
           "Quantity": -1,
           "Price": 240,
           "TotalPrice": -1,
@@ -162,6 +196,7 @@
       "Rewards": [
         {
           "Product": "",
+          "RewardsType":"",
           "Quantity": -1,
           "Price": 150,
           "TotalPrice": -1,
@@ -183,6 +218,7 @@
       "Rewards": [
         {
           "Product": "",
+          "RewardsType":"",
           "Quantity": -1,
           "Price": 25,
           "TotalPrice": -1,
@@ -204,6 +240,7 @@
       "Rewards": [
         {
           "Product": "",
+          "RewardsType":"",
           "Quantity": -1,
           "Price": -50,
           "TotalPrice": -1,
@@ -230,6 +267,7 @@
       "Rewards": [
         {
           "Product": "",
+          "RewardsType":"",
           "Quantity": -1,
           "Price": -1,
           "TotalPrice": -1,
@@ -251,6 +289,7 @@
       "Rewards": [
         {
           "Product": "",
+          "RewardsType":"",
           "Quantity": -1,
           "Price": -1,
           "TotalPrice": -1,
@@ -272,6 +311,7 @@
       "Rewards": [
         {
           "Product": "",
+          "RewardsType":"",
           "Quantity": -1,
           "Price": -1,
           "TotalPrice": -1,
