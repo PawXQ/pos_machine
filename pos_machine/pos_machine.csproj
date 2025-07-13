@@ -52,9 +52,7 @@
   <ItemGroup>
     <Compile Include="ADiscount.cs" />
     <Compile Include="DisCount.cs" />
-<<<<<<< HEAD
     <Compile Include="DiscountContext.cs" />
-=======
     <Compile Include="DiscountFactory.cs" />
     <Compile Include="discount\AllItems85Percent.cs" />
     <Compile Include="discount\BraisedPork3For240.cs" />
@@ -66,7 +64,6 @@
     <Compile Include="discount\MackerelWithSoup85Percent.cs" />
     <Compile Include="discount\PorkRibFreeTea.cs" />
     <Compile Include="discount\Spend399Get50Off.cs" />
->>>>>>> b71b0432113bc5b05fc831874439cc6e0cbc099b
     <Compile Include="EventPanel.cs" />
     <Compile Include="Extension.cs" />
     <Compile Include="Form1.cs">
