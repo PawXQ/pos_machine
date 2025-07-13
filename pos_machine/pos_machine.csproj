@@ -33,7 +33,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -48,6 +52,9 @@
   <ItemGroup>
     <Compile Include="ADiscount.cs" />
     <Compile Include="DisCount.cs" />
+<<<<<<< HEAD
+    <Compile Include="DiscountContext.cs" />
+=======
     <Compile Include="DiscountFactory.cs" />
     <Compile Include="discount\AllItems85Percent.cs" />
     <Compile Include="discount\BraisedPork3For240.cs" />
@@ -59,6 +66,7 @@
     <Compile Include="discount\MackerelWithSoup85Percent.cs" />
     <Compile Include="discount\PorkRibFreeTea.cs" />
     <Compile Include="discount\Spend399Get50Off.cs" />
+>>>>>>> b71b0432113bc5b05fc831874439cc6e0cbc099b
     <Compile Include="EventPanel.cs" />
     <Compile Include="Extension.cs" />
     <Compile Include="Form1.cs">
@@ -68,11 +76,19 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Item.cs" />
+    <Compile Include="Menus.cs" />
     <Compile Include="Order.cs" />
     <Compile Include="PanelInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ShowPanel.cs" />
+    <Compile Include="Strategies\ADiscountStrategy.cs" />
+    <Compile Include="Strategies\AnyProductCashDiscount.cs" />
+    <Compile Include="Strategies\ProductCashDiscount.cs" />
+    <Compile Include="Strategies\ProductFreeDiscount.cs" />
+    <Compile Include="Strategies\ProductPercentageDiscount.cs" />
+    <Compile Include="Strategies\TotalCashDiscount.cs" />
+    <Compile Include="Student.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -85,6 +101,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

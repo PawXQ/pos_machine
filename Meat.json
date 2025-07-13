@@ -1,0 +1,276 @@
+{
+  "Items": [
+    {
+      "TypeName": "主餐",
+      "Foods": [
+        { "Name": "牛肉燒肉便當", "Price": 180 },
+        { "Name": "豬肉燒肉便當", "Price": 160 },
+        { "Name": "雞肉燒肉便當", "Price": 150 },
+        { "Name": "和牛燒肉便當", "Price": 250 },
+        { "Name": "羊肉燒肉便當", "Price": 220 },
+        { "Name": "燒肉拼盤便當", "Price": 280 },
+        { "Name": "海鮮燒肉便當", "Price": 200 },
+        { "Name": "素燒肉便當", "Price": 140 },
+        { "Name": "韓式燒肉便當", "Price": 210 },
+        { "Name": "燒肉飯盒", "Price": 170 }
+      ]
+    },
+    {
+      "TypeName": "附餐",
+      "Foods": [
+        { "Name": "泡菜", "Price": 30 },
+        { "Name": "蒜蓉醬", "Price": 25 },
+        { "Name": "韓式冷麵", "Price": 80 },
+        { "Name": "燒烤玉米", "Price": 50 },
+        { "Name": "炸豆腐", "Price": 60 }
+      ]
+    },
+    {
+      "TypeName": "飲料",
+      "Foods": [
+        { "Name": "韓式冰茶", "Price": 40 },
+        { "Name": "檸檬水", "Price": 35 },
+        { "Name": "啤酒", "Price": 80 },
+        { "Name": "無酒精飲料", "Price": 50 },
+        { "Name": "生啤酒", "Price": 90 }
+      ]
+    },
+    {
+      "TypeName": "點心",
+      "Foods": [
+        { "Name": "布丁", "Price": 60 },
+        { "Name": "紅豆餅", "Price": 70 },
+        { "Name": "冰淇淋", "Price": 80 },
+        { "Name": "炸麻糬", "Price": 90 },
+        { "Name": "芝麻球", "Price": 50 }
+      ]
+    }
+  ],
+  "Discounts": [
+    {
+      "id": 1,
+      "Name": "羊肉燒肉便當買二送一",
+      "Strategy": "pos_machine.Strategies.ProductFreeDiscount",
+      "Conditions": [
+        {
+          "Product": "羊肉燒肉便當",
+          "Quantity": 2,
+          "TotalPrice": -1
+        }
+      ],
+      "Rewards": [
+        {
+          "Product": "羊肉燒肉便當",
+          "Quantity": 1,
+          "Price": -1,
+          "TotalPrice": -1,
+          "Percentage": -1
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "Name": "燒肉拼盤送啤酒",
+      "Strategy": "pos_machine.Strategies.ProductFreeDiscount",
+      "Conditions": [
+        {
+          "Product": "燒肉拼盤便當",
+          "Quantity": 1,
+          "TotalPrice": -1
+        }
+      ],
+      "Rewards": [
+        {
+          "Product": "啤酒",
+          "Quantity": 1,
+          "Price": -1,
+          "TotalPrice": -1,
+          "Percentage": -1
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "Name": "韓式燒肉搭配泡菜送冷麵",
+      "Strategy": "pos_machine.Strategies.ProductFreeDiscount",
+      "Conditions": [
+        {
+          "Product": "韓式燒肉便當",
+          "Quantity": 1,
+          "TotalPrice": -1
+        },
+        {
+          "Product": "泡菜",
+          "Quantity": 1,
+          "TotalPrice": -1
+        }
+      ],
+      "Rewards": [
+        {
+          "Product": "韓式冷麵",
+          "Quantity": 1,
+          "Price": -1,
+          "TotalPrice": -1,
+          "Percentage": -1
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "Name": "燒肉拼盤三個打8折",
+      "Strategy": "pos_machine.Strategies.ProductPercentageDiscount",
+      "Conditions": [
+        {
+          "Product": "燒肉拼盤便當",
+          "Quantity": 3,
+          "TotalPrice": -1
+        }
+      ],
+      "Rewards": [
+        {
+          "Product": "",
+          "Quantity": -1,
+          "Price": -1,
+          "TotalPrice": -1,
+          "Percentage": 0.8
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "Name": "海鮮燒肉搭啤酒折扣價",
+      "Strategy": "pos_machine.Strategies.ProductCashDiscount",
+      "Conditions": [
+        {
+          "Product": "海鮮燒肉便當",
+          "Quantity": 1,
+          "TotalPrice": -1
+        },
+        {
+          "Product": "啤酒",
+          "Quantity": 1,
+          "TotalPrice": -1
+        }
+      ],
+      "Rewards": [
+        {
+          "Product": "",
+          "Quantity": -1,
+          "Price": 180,
+          "TotalPrice": -1,
+          "Percentage": -1
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "Name": "所有飲料均一價30元",
+      "Strategy": "pos_machine.Strategies.AnyProductCashDiscount",
+      "Conditions": [
+        {
+          "Product": "韓式冰茶,檸檬水,啤酒,無酒精飲料,生啤酒",
+          "Quantity": 1,
+          "TotalPrice": -1
+        }
+      ],
+      "Rewards": [
+        {
+          "Product": "",
+          "Quantity": -1,
+          "Price": 30,
+          "TotalPrice": -1,
+          "Percentage": -1
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "Name": "全場消費滿599折100",
+      "Strategy": "pos_machine.Strategies.TotalCashDiscount",
+      "Conditions": [
+        {
+          "Product": "",
+          "Quantity": -1,
+          "TotalPrice": 599
+        }
+      ],
+      "Rewards": [
+        {
+          "Product": "",
+          "Quantity": -1,
+          "Price": -100,
+          "TotalPrice": -1,
+          "Percentage": -1
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "Name": "和牛燒肉搭配泡菜85折",
+      "Strategy": "pos_machine.Strategies.ProductPercentageDiscount",
+      "Conditions": [
+        {
+          "Product": "和牛燒肉便當",
+          "Quantity": 1,
+          "TotalPrice": -1
+        },
+        {
+          "Product": "泡菜",
+          "Quantity": 1,
+          "TotalPrice": -1
+        }
+      ],
+      "Rewards": [
+        {
+          "Product": "",
+          "Quantity": -1,
+          "Price": -1,
+          "TotalPrice": -1,
+          "Percentage": 0.85
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "Name": "燒肉套餐三件享七折",
+      "Strategy": "pos_machine.Strategies.ProductPercentageDiscount",
+      "Conditions": [
+        {
+          "Product": "燒肉飯盒",
+          "Quantity": 3,
+          "TotalPrice": -1
+        }
+      ],
+      "Rewards": [
+        {
+          "Product": "",
+          "Quantity": -1,
+          "Price": -1,
+          "TotalPrice": -1,
+          "Percentage": 0.7
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "Name": "全場打85折",
+      "Strategy": "pos_machine.Strategies.ProductPercentageDiscount",
+      "Conditions": [
+        {
+          "Product": "ALL",
+          "Quantity": 1,
+          "TotalPrice": -1
+        }
+      ],
+      "Rewards": [
+        {
+          "Product": "",
+          "Quantity": -1,
+          "Price": -1,
+          "TotalPrice": -1,
+          "Percentage": 0.85
+        }
+      ]
+    }
+  ]
+}

@@ -27,7 +27,7 @@ namespace pos_machine
             for (int i = 0; i < list.Count; i++)
             {
                 FlowLayoutPanel flowLayoutPanel2 = new FlowLayoutPanel();
-                flowLayoutPanel2.Size = new System.Drawing.Size(200, 25);
+                flowLayoutPanel2.Size = new System.Drawing.Size(250, 25);
                 CheckBox checkBox = new CheckBox();
                 checkBox.AutoSize = true;
                 checkBox.Font = new System.Drawing.Font("Microsoft JhengHei", 12F);

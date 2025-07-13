@@ -1,0 +1,323 @@
+{
+  "Items": [
+    {
+      "TypeName": "主餐",
+      "Foods": [
+        { "Name": "雞腿便當", "Price": 95 },
+        { "Name": "排骨便當", "Price": 90 },
+        { "Name": "滷肉便當", "Price": 85 },
+        { "Name": "魚排便當", "Price": 100 },
+        { "Name": "燒肉便當", "Price": 105 },
+        { "Name": "咖哩便當", "Price": 110 },
+        { "Name": "炸雞便當", "Price": 80 },
+        { "Name": "鯖魚便當", "Price": 120 },
+        { "Name": "雞排便當", "Price": 115 },
+        { "Name": "控肉便當", "Price": 95 }
+      ]
+    },
+    {
+      "TypeName": "附餐",
+      "Foods": [
+        { "Name": "玉米濃湯", "Price": 60 },
+        { "Name": "蔥抓餅", "Price": 70 },
+        { "Name": "炸薯條", "Price": 80 },
+        { "Name": "涼拌木耳", "Price": 90 },
+        { "Name": "蒸蛋", "Price": 100 }
+      ]
+    },
+    {
+      "TypeName": "飲料",
+      "Foods": [
+        { "Name": "紅茶", "Price": 30 },
+        { "Name": "綠茶", "Price": 35 },
+        { "Name": "冬瓜茶", "Price": 40 },
+        { "Name": "奶茶", "Price": 45 },
+        { "Name": "可樂", "Price": 50 },
+        { "Name": "汽水", "Price": 50 },
+        { "Name": "咖啡", "Price": 50 }
+      ]
+    },
+    {
+      "TypeName": "點心",
+      "Foods": [
+        { "Name": "布丁", "Price": 60 },
+        { "Name": "蛋塔", "Price": 70 },
+        { "Name": "提拉米蘇", "Price": 80 },
+        { "Name": "起司蛋糕", "Price": 90 },
+        { "Name": "巧克力慕斯", "Price": 100 }
+      ]
+    }
+  ],
+  "Discounts": [
+    {
+      "id": 0,
+      "Name": "所有飲料任選三杯送一杯送最便宜價格",
+      "Strategy": "pos_machine.Strategies.ProductFreeDiscount",
+      "Conditions": [
+        {
+          "Product": "紅茶,綠茶,冬瓜茶,奶茶,可樂",
+          "Quantity": 3,
+          "TotalPrice": 0
+        }
+        // {
+        //   "Product": "汽水,咖啡",
+        //   "Quantity": 3,
+        //   "TotalPrice": 0
+        // }
+      ],
+      "Rewards": [
+        {
+          "Product": "紅茶,綠茶,冬瓜茶,奶茶,可樂",
+          "RewardsType":"Min",
+          "Quantity": 1,
+          "Price": 0,
+          "TotalPrice": 0,
+          "Percentage": 0
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "Name": "雞腿便當買二送一",
+      "Strategy": "pos_machine.Strategies.ProductFreeDiscount",
+      "Conditions": [
+        {
+          "Product": "雞腿便當",
+          "Quantity": 2,
+          "TotalPrice": -1
+        }
+      ],
+      "Rewards": [
+        {
+          "Product": "雞腿便當",
+          "RewardsType":"",
+          "Quantity": 1,
+          "Price": -1,
+          "TotalPrice": -1,
+          "Percentage": -1
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "Name": "排骨便當送紅茶",
+      "Strategy": "pos_machine.Strategies.ProductFreeDiscount",
+      "Conditions": [
+        {
+          "Product": "排骨便當",
+          "Quantity": 1,
+          "TotalPrice": -1
+        }
+      ],
+      "Rewards": [
+        {
+          "Product": "紅茶",
+          "RewardsType":"",
+          "Quantity": 1,
+          "Price": -1,
+          "TotalPrice": -1,
+          "Percentage": -1
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "Name": "燒肉便當搭配蒸蛋送提拉米蘇和布丁",
+      "Strategy": "pos_machine.Strategies.ProductFreeDiscount",
+      "Conditions": [
+        {
+          "Product": "燒肉便當,滷肉便當",
+          "Quantity": 2,
+          "TotalPrice": -1
+        },
+        {
+          "Product": "蒸蛋",
+          "Quantity": 1,
+          "TotalPrice": -1
+        }
+      ],
+      "Rewards": [
+        {
+          "Product": "提拉米蘇",
+          "RewardsType":"",
+          "Quantity": 1,
+          "Price": -1,
+          "TotalPrice": -1,
+          "Percentage": -1
+        },
+        {
+          "Product": "布丁",
+          "RewardsType":"",
+          "Quantity": 5,
+          "Price": -1,
+          "TotalPrice": -1,
+          "Percentage": -1
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "Name": "滷肉便當買三個240元",
+      "Strategy": "pos_machine.Strategies.ProductCashDiscount",
+      "Conditions": [
+        {
+          "Product": "滷肉便當",
+          "Quantity": 3,
+          "TotalPrice": -1
+        }
+      ],
+      "Rewards": [
+        {
+          "Product": "",
+          "RewardsType":"",
+          "Quantity": -1,
+          "Price": 240,
+          "TotalPrice": -1,
+          "Percentage": -1
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "Name": "咖哩便當搭可樂150元",
+      "Strategy": "pos_machine.Strategies.ProductCashDiscount",
+      "Conditions": [
+        {
+          "Product": "咖哩便當",
+          "Quantity": 1,
+          "TotalPrice": -1
+        },
+        {
+          "Product": "可樂",
+          "Quantity": 1,
+          "TotalPrice": -1
+        }
+      ],
+      "Rewards": [
+        {
+          "Product": "",
+          "RewardsType":"",
+          "Quantity": -1,
+          "Price": 150,
+          "TotalPrice": -1,
+          "Percentage": -1
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "Name": "所有飲料均一價25元",
+      "Strategy": "pos_machine.Strategies.AnyProductCashDiscount",
+      "Conditions": [
+        {
+          "Product": "紅茶,綠茶,冬瓜茶,奶茶,可樂",
+          "Quantity": 1,
+          "TotalPrice": -1
+        }
+      ],
+      "Rewards": [
+        {
+          "Product": "",
+          "RewardsType":"",
+          "Quantity": -1,
+          "Price": 25,
+          "TotalPrice": -1,
+          "Percentage": -1
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "Name": "全場消費滿399折50",
+      "Strategy": "pos_machine.Strategies.TotalCashDiscount",
+      "Conditions": [
+        {
+          "Product": "",
+          "Quantity": -1,
+          "TotalPrice": 399
+        }
+      ],
+      "Rewards": [
+        {
+          "Product": "",
+          "RewardsType":"",
+          "Quantity": -1,
+          "Price": -50,
+          "TotalPrice": -1,
+          "Percentage": -1
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "Name": "鯖魚便當搭配玉米濃湯85折",
+      "Strategy": "pos_machine.Strategies.ProductPercentageDiscount",
+      "Conditions": [
+        {
+          "Product": "鯖魚便當",
+          "Quantity": 1,
+          "TotalPrice": -1
+        },
+        {
+          "Product": "玉米濃湯",
+          "Quantity": 1,
+          "TotalPrice": -1
+        }
+      ],
+      "Rewards": [
+        {
+          "Product": "",
+          "RewardsType":"",
+          "Quantity": -1,
+          "Price": -1,
+          "TotalPrice": -1,
+          "Percentage": 0.85
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "Name": "雞排便當三件79折",
+      "Strategy": "pos_machine.Strategies.ProductPercentageDiscount",
+      "Conditions": [
+        {
+          "Product": "雞排便當",
+          "Quantity": 3,
+          "TotalPrice": -1
+        }
+      ],
+      "Rewards": [
+        {
+          "Product": "",
+          "RewardsType":"",
+          "Quantity": -1,
+          "Price": -1,
+          "TotalPrice": -1,
+          "Percentage": 0.79
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "Name": "全場打85折",
+      "Strategy": "pos_machine.Strategies.ProductPercentageDiscount",
+      "Conditions": [
+        {
+          "Product": "ALL",
+          "Quantity": 1,
+          "TotalPrice": -1
+        }
+      ],
+      "Rewards": [
+        {
+          "Product": "",
+          "RewardsType":"",
+          "Quantity": -1,
+          "Price": -1,
+          "TotalPrice": -1,
+          "Percentage": 0.85
+        }
+      ]
+    }
+  ]
+}

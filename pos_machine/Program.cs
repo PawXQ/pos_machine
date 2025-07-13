@@ -14,6 +14,9 @@ namespace pos_machine
         [STAThread]
         static void Main()
         {
+            Type type = Type.GetType("pos_machine.Student");
+            Student student = (Student)Activator.CreateInstance(type, new object[] { "Kelly", 10, 60 });
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
