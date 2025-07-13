@@ -31,14 +31,10 @@ namespace pos_machine
 
         public static void DiscountOrder(Discount discountType, List<Item> items)
         {
-            Item product;
-            int discount_times;
-            int total;
-            bool contain;
-            List<Item> product_list = new List<Item>();
             items.RemoveAll(x => x.Name.Contains("贈送"));
             items.RemoveAll(x => x.Name.Contains("折扣"));
 
+<<<<<<< HEAD
             Type type = Type.GetType(discountType.Strategy);
             ADiscountStrategy strategy = (ADiscountStrategy)Activator.CreateInstance(type, new object[] { discountType, items });
 
@@ -191,6 +187,10 @@ namespace pos_machine
             //        }
             //        break;
             //}
+=======
+            ADiscount aDiscount = DiscountFactory.createDiscount(discountType, items);
+            aDiscount.DiscountItem();
+>>>>>>> b71b0432113bc5b05fc831874439cc6e0cbc099b
             ShowPanel.Render(items);
         }
     }
