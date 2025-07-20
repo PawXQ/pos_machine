@@ -1,6 +1,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net.Http;
 using System.Reflection;
@@ -47,7 +48,7 @@ namespace pos_machine.AI
 
             string content = JsonConvert.SerializeObject(this.requestBody);
 
-            var request = new HttpRequestMessage(HttpMethod.Post, "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=AIzaSyDmM_uG1IOw92eCQMWuZddj8mXwNrZEbsM");
+            var request = new HttpRequestMessage(HttpMethod.Post, $"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={ConfigurationManager.AppSettings["gemini_key"]}");
             request.Content = new StringContent(content);
             var response = await client.SendAsync(request);
             string responseString = await response.Content.ReadAsStringAsync();

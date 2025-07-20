@@ -26,6 +26,9 @@ namespace pos_machine
         public async Task<string> GetResult()
         {
             string reason = "";
+
+            if (UIOrderRequestModel.OrderItems.Count == 0) return reason;
+
             if (!UIOrderRequestModel.AIRecommend)
             {
                 SelectStrategyUse();
