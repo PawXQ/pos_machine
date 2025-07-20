@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -14,6 +15,7 @@ namespace pos_machine
         [STAThread]
         static void Main()
         {
+
             Type type = Type.GetType("pos_machine.Student");
             Student student = (Student)Activator.CreateInstance(type, new object[] { "Kelly", 10, 60 });
 

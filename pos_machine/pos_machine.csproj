@@ -51,6 +51,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ADiscount.cs" />
+    <Compile Include="AI\AIAgent.cs" />
+    <Compile Include="AI\AIRequest.cs" />
+    <Compile Include="AI\AIResponse.cs" />
+    <Compile Include="AI\AIResult.cs" />
+    <Compile Include="AI\ATool.cs" />
+    <Compile Include="AI\FunctionTool\AiDiscount\AiDiscountArgs.cs" />
+    <Compile Include="AI\FunctionTool\AiDiscount\AiDisCountFunctionDeclaration.cs" />
+    <Compile Include="AI\FunctionTool\AiDiscount\AiDiscountTool.cs" />
     <Compile Include="DisCount.cs" />
     <Compile Include="DiscountContext.cs" />
     <Compile Include="DiscountFactory.cs" />
@@ -72,8 +80,10 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Item.cs" />
-    <Compile Include="Menus.cs" />
+    <Compile Include="Models\Item.cs" />
+    <Compile Include="Models\MenuData.cs" />
+    <Compile Include="Models\Menus.cs" />
+    <Compile Include="Models\UIOrderRequestModel.cs" />
     <Compile Include="Order.cs" />
     <Compile Include="PanelInfo.cs" />
     <Compile Include="Program.cs" />

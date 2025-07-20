@@ -42,7 +42,7 @@
       "Foods": [
         { "Name": "布丁", "Price": 60 },
         { "Name": "蛋塔", "Price": 70 },
-        { "Name": "提拉米蘇", "Price": 80 },
+        { "Name": "提拉米蘇", "Price": 65 },
         { "Name": "起司蛋糕", "Price": 90 },
         { "Name": "巧克力慕斯", "Price": 100 }
       ]
@@ -228,13 +228,13 @@
     },
     {
       "id": 7,
-      "Name": "全場消費滿399折50",
+      "Name": "全場消費滿199折50",
       "Strategy": "pos_machine.Strategies.TotalCashDiscount",
       "Conditions": [
         {
           "Product": "",
           "Quantity": -1,
-          "TotalPrice": 399
+          "TotalPrice": 199
         }
       ],
       "Rewards": [
@@ -277,7 +277,7 @@
     },
     {
       "id": 9,
-      "Name": "雞排便當三件79折",
+      "Name": "雞排便當三件75",
       "Strategy": "pos_machine.Strategies.ProductPercentageDiscount",
       "Conditions": [
         {
@@ -293,7 +293,7 @@
           "Quantity": -1,
           "Price": -1,
           "TotalPrice": -1,
-          "Percentage": 0.79
+          "Percentage": 0.75
         }
       ]
     },
@@ -316,6 +316,36 @@
           "Price": -1,
           "TotalPrice": -1,
           "Percentage": 0.85
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "Name": "雞腿便當買兩個送提拉米蘇和紅茶",
+      "Strategy": "pos_machine.Strategies.ProductFreeDiscount",
+      "Conditions": [
+        {
+          "Product": "雞腿便當",
+          "Quantity": 2,
+          "TotalPrice": -1
+        }
+      ],
+      "Rewards": [
+        {
+          "Product": "提拉米蘇",
+          "RewardsType":"",
+          "Quantity": 1,
+          "Price": -1,
+          "TotalPrice": -1,
+          "Percentage": -1
+        },
+        {
+          "Product": "紅茶",
+          "RewardsType":"",
+          "Quantity": 1,
+          "Price": -1,
+          "TotalPrice": -1,
+          "Percentage": -1
         }
       ]
     }

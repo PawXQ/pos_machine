@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using pos_machine.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -45,12 +46,11 @@ namespace pos_machine
         private void Form1_Load(object sender, EventArgs e)
         {
 
-            string menu_path = ConfigurationManager.AppSettings["menu_path"];
-            string content = File.ReadAllText(menu_path);
-            Menus menus = JsonConvert.DeserializeObject<Menus>(content); // ORM => Object Relaction Mapping
+            //string menu_path = ConfigurationManager.AppSettings["menu_path"];
+            //string content = File.ReadAllText(menu_path);
+            //Menus menus = JsonConvert.DeserializeObject<Menus>(content); // ORM => Object Relaction Mapping
 
-
-            for (int i = 0; i < menus.Items.Length; i++)
+            for (int i = 0; i < MenuData.Items.Length; i++)
             {
                 FlowLayoutPanel flowLayoutPanel2 = new FlowLayoutPanel();
                 flowLayoutPanel2.BorderStyle = BorderStyle.FixedSingle;
@@ -58,21 +58,21 @@ namespace pos_machine
                 flowLayoutPanel2.Size = new System.Drawing.Size(this.flowLayoutPanel1.Width / 2 - 50, this.flowLayoutPanel1.Height / 2);
                 Label label = new Label();
 
-                label.Text = menus.Items[i].TypeName.ToString();
+                label.Text = MenuData.Items[i].TypeName.ToString();
                 label.Size = new System.Drawing.Size(flowLayoutPanel2.Width, 30);
                 label.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-                List<string> foods = menus.Items[i].Foods.Select(x => $"{x.Name}${x.Price}").ToList();
+                List<string> foods = MenuData.Items[i].Foods.Select(x => $"{x.Name}${x.Price}").ToList();
                 flowLayoutPanel2.Controls.Add(label);
                 flowLayoutPanel2.CreateFromList(foods, CheckChange, ValueChange);
                 flowLayoutPanel1.Controls.Add(flowLayoutPanel2);
             }
-            comboBox1.DataSource = menus.Discounts;
+            comboBox1.DataSource = MenuData.Discounts;
             comboBox1.DisplayMember = "Name";
 
-            var query0 = menus.Items.GroupBy(x => x.TypeName);
+            var query0 = MenuData.Items.GroupBy(x => x.TypeName);
 
             //groupby
-            var query = menus.Items.GroupBy(x => x.TypeName).Select(x => new
+            var query = MenuData.Items.GroupBy(x => x.TypeName).Select(x => new
             {
                 Name = x.Key,
                 Total = x.Sum(y => y.Foods.Sum(z => z.Price))
@@ -82,7 +82,7 @@ namespace pos_machine
                 Console.WriteLine(item.Name + ":" + item.Total);
             }
 
-            var query2 = menus.Discounts.GroupBy(x => x.Strategy).Select(x => new
+            var query2 = MenuData.Discounts.GroupBy(x => x.Strategy).Select(x => new
             {
                 Name = x.Key,
                 Count = x.Count(),
@@ -91,7 +91,7 @@ namespace pos_machine
             {
                 Console.WriteLine(item.Name + ":" + item.Count);
             }
-            var query3 = menus.Discounts.GroupBy(x => x.Strategy);
+            var query3 = MenuData.Discounts.GroupBy(x => x.Strategy);
 
             foreach (var item in query3)
             {
@@ -105,7 +105,7 @@ namespace pos_machine
 
         }
 
-        private void CheckChange(object sender, EventArgs e)
+        private async void CheckChange(object sender, EventArgs e)
         {
             CheckBox checkBox = (CheckBox)sender;
             FlowLayoutPanel flowLayoutPanel = (FlowLayoutPanel)checkBox.Parent;
@@ -115,12 +115,17 @@ namespace pos_machine
             Item item = new Item(Name: $"{checkBox.Text.Split('$')[0]}",
                                  UnitPrice: $"{checkBox.Text.Split('$')[1]}",
                                  Count: $"{numericUpDown.Value}");
-            Order.Additem(item, (Discount)comboBox1.SelectedValue);
-            //Order.Render(flowLayoutPanel5);
-            //flowLayoutPanel5.UpdatePanel(checkBox);
+            if (airecommand.Checked)
+            {
+                await Order.Additem(new UIOrderRequestModel(true, item));
+            }
+            else
+            {
+                await Order.Additem(new UIOrderRequestModel((Discount)comboBox1.SelectedValue, item));
+            }
         }
 
-        private void ValueChange(object sender, EventArgs e)
+        private async void ValueChange(object sender, EventArgs e)
         {
             NumericUpDown numericUpDown = (NumericUpDown)sender;
             FlowLayoutPanel flowLayoutPanel = (FlowLayoutPanel)numericUpDown.Parent;
@@ -130,25 +135,45 @@ namespace pos_machine
             Item item = new Item(Name: $"{checkBox.Text.Split('$')[0]}",
                                  UnitPrice: $"{checkBox.Text.Split('$')[1]}",
                                  Count: $"{numericUpDown.Value}");
-            Order.Additem(item, (Discount)comboBox1.SelectedValue);
-            //Order.Render(flowLayoutPanel5);
-            //flowLayoutPanel5.UpdatePanel(checkBox);
+            if (airecommand.Checked)
+            {
+                await Order.Additem(new UIOrderRequestModel(true, item));
+            }
+            else
+            {
+                await Order.Additem(new UIOrderRequestModel((Discount)comboBox1.SelectedValue, item));
+            }
+
         }
         private void RenderPanel(object sender, PanelInfo panelInfo)
         {
             flowLayoutPanel5.Controls.Clear();
             flowLayoutPanel5.Controls.Add(panelInfo.flowLayoutPanel);
             sum.Text = panelInfo.total_price.ToString();
+            textBox1.Text = panelInfo.reason.ToString();
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private async void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (comboBox1.SelectedValue is Discount discount)
+            if (comboBox1.SelectedValue is Discount discountType && !airecommand.Checked)
             {
-                Order.DisCountOrder(discount);
+                await Order.DisCountOrder(new UIOrderRequestModel(discountType));
             }
+        }
 
+        private async void airecommand_CheckedChanged(object sender, EventArgs e)
+        {
+            if (airecommand.Checked)
+            {
+                comboBox1.Enabled = false;
+                await Order.DisCountOrder(new UIOrderRequestModel(true));
+            }
+            if (!airecommand.Checked)
+            {
+                comboBox1.Enabled = true;
 
+                await Order.DisCountOrder(new UIOrderRequestModel((Discount)comboBox1.SelectedValue));
+            }
         }
     }
 }

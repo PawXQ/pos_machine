@@ -11,7 +11,7 @@ namespace pos_machine
     {
         //public static List<Item> list_item = new List<Item>();
         //public static FlowLayoutPanel flowoutpanel_outlayer = new FlowLayoutPanel();
-        public static void Render(List<Item> list_item)
+        public static void Render(List<Item> list_item, string reason)
         {
             //flowoutpanel_top_level.Controls.Clear();
             FlowLayoutPanel flowoutpanel_outlayer = new FlowLayoutPanel();
@@ -36,7 +36,7 @@ namespace pos_machine
                 flowoutpanel_outlayer.Controls.Add(flowoutpanel);
                 total_price += int.Parse(item.Total);
             }
-            PanelInfo panelinfo = new PanelInfo(flowLayoutPanel: flowoutpanel_outlayer, total_price: total_price);
+            PanelInfo panelinfo = new PanelInfo(flowLayoutPanel: flowoutpanel_outlayer, total_price: total_price, reason: reason);
 
             EventPanel.UpdatePanel(panelinfo);
             //return flowoutpanel_outlayer;

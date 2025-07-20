@@ -36,6 +36,8 @@
             this.label8 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.airecommand = new System.Windows.Forms.CheckBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.flowLayoutPanel5.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -43,7 +45,7 @@
             // 
             this.sum.AutoSize = true;
             this.sum.Font = new System.Drawing.Font("Microsoft YaHei", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sum.Location = new System.Drawing.Point(837, 669);
+            this.sum.Location = new System.Drawing.Point(944, 669);
             this.sum.Name = "sum";
             this.sum.Size = new System.Drawing.Size(25, 28);
             this.sum.TabIndex = 2;
@@ -108,10 +110,10 @@
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(646, 669);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBox1.Location = new System.Drawing.Point(646, 670);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(127, 21);
+            this.comboBox1.Size = new System.Drawing.Size(230, 21);
             this.comboBox1.TabIndex = 9;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
@@ -122,12 +124,33 @@
             this.flowLayoutPanel1.Size = new System.Drawing.Size(622, 679);
             this.flowLayoutPanel1.TabIndex = 10;
             // 
+            // airecommand
+            // 
+            this.airecommand.AutoSize = true;
+            this.airecommand.Location = new System.Drawing.Point(646, 647);
+            this.airecommand.Name = "airecommand";
+            this.airecommand.Size = new System.Drawing.Size(99, 17);
+            this.airecommand.TabIndex = 11;
+            this.airecommand.Text = "AI Recommand";
+            this.airecommand.UseVisualStyleBackColor = true;
+            this.airecommand.CheckedChanged += new System.EventHandler(this.airecommand_CheckedChanged);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(947, 54);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(233, 612);
+            this.textBox1.TabIndex = 12;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.ClientSize = new System.Drawing.Size(981, 704);
+            this.ClientSize = new System.Drawing.Size(1185, 704);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.airecommand);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.flowLayoutPanel5);
@@ -151,6 +174,8 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.CheckBox airecommand;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
 

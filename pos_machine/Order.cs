@@ -1,4 +1,5 @@
-﻿using System;
+﻿using pos_machine.Models;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -13,21 +14,24 @@ namespace pos_machine
     {
         public static List<Item> list_item = new List<Item>();
 
-        public static void Additem(Item item, Discount discount)
+        public static async Task Additem(UIOrderRequestModel uiOrderRequestModel)
         {
-            Item product = list_item.FirstOrDefault(x => x.Name == item.Name);
+            Item product = list_item.FirstOrDefault(x => x.Name == uiOrderRequestModel.Item.Name);
 
-            if (product == null && item.Count == "0") { return; }
-            if (product == null) { list_item.Add(item); return; }
-            if (product != null) { product.Count = item.Count; }
+            if (product == null && uiOrderRequestModel.Item.Count == "0") { return; }
+            if (product == null) { list_item.Add(uiOrderRequestModel.Item); return; }
+            if (product != null) { product.Count = uiOrderRequestModel.Item.Count; }
             if (product.Count == "0") { list_item.Remove(product); }
 
-            DisCount.DiscountOrder(discount, list_item);
+            uiOrderRequestModel.OrderItems = list_item;
+
+            await DisCount.DiscountOrder(uiOrderRequestModel);
         }
 
-        public static void DisCountOrder(Discount discount)
+        public static async Task DisCountOrder(UIOrderRequestModel uiOrderRequestModel)
         {
-            DisCount.DiscountOrder(discount, list_item);
+            uiOrderRequestModel.OrderItems = list_item;
+            await DisCount.DiscountOrder(uiOrderRequestModel);
         }
 
         //public static void Render(FlowLayoutPanel flowoutpanel_top_level)

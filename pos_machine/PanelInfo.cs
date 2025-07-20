@@ -11,10 +11,12 @@ namespace pos_machine
     {
         public FlowLayoutPanel flowLayoutPanel;
         public int total_price;
-        public PanelInfo(FlowLayoutPanel flowLayoutPanel, int total_price)
+        public string reason;
+        public PanelInfo(FlowLayoutPanel flowLayoutPanel, int total_price, string reason)
         {
             this.flowLayoutPanel = flowLayoutPanel;
             this.total_price = total_price;
+            this.reason = reason;
         }
     }
 }
